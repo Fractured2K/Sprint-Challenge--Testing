@@ -16,5 +16,19 @@ describe('Server.js endpoint tests', () => {
 
 			expect(response).toBe(200);
 		});
+
+		it('should return 422 if title or genre are missing from the body', async () => {
+			let game = {
+				title: 'Pacman',
+				genre: 'Arcade',
+				releaseYear: 1980
+			};
+
+			let response = await request(server)
+				.post('/games')
+				.send(game);
+
+			expect(response).toBe(422);
+		});
 	});
 });
