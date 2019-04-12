@@ -4,13 +4,13 @@ const server = require('./server');
 describe('Server.js endpoint tests', () => {
 	describe('POST /games', () => {
 		it('should return status 200 OK after creating a game', async () => {
-			const game = {
+			let game = {
 				title: 'Pacman',
 				genre: 'Arcade',
 				releaseYear: 1980
 			};
 
-			const response = await request(server)
+			let response = await request(server)
 				.post('/games')
 				.send(game);
 
@@ -32,13 +32,13 @@ describe('Server.js endpoint tests', () => {
 		});
 
 		it('should return newly created game', async () => {
-			const game = {
+			let game = {
 				title: 'Pacman',
 				genre: 'Arcade',
 				releaseYear: 1980
 			};
 
-			const response = await request(server)
+			let response = await request(server)
 				.post('/games')
 				.send(game);
 
@@ -52,15 +52,18 @@ describe('Server.js endpoint tests', () => {
 
 	describe('GET /games', () => {
 		it('should return status 200 OK after retrieving games', async () => {
-			const response = await request(server).get('/');
-
+			let response = await request(server).get('/games');
 			expect(response).toBe(200);
 		});
 
 		it('should return an array after retrieving games', async () => {
-			const response = await request(server).get('/');
-
+			let response = await request(server).get('/games');
 			expect(Array.isArray(response.body)).toBe(true);
+		});
+
+		it('should return json content type', async () => {
+			let response = await request(server).get('/games');
+			expect(response.type).toBe('application/json');
 		});
 	});
 });
