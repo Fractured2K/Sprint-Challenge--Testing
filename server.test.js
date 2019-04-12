@@ -42,6 +42,7 @@ describe('Server.js endpoint tests', () => {
 				.send(game);
 
 			expect(response.body).toEqual({
+				id: 2,
 				title: 'Pacman',
 				genre: 'Arcade',
 				releaseYear: 1980
