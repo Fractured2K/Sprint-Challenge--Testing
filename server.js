@@ -2,6 +2,7 @@ const express = require('express');
 
 const server = express();
 const db = [];
+let id = 0;
 
 server.use(express.json());
 
@@ -17,9 +18,15 @@ server.post('/games', async (req, res) => {
 			message: 'Sorry, but you must enter a title and genre'
 		});
 
-	await db.push(req.body);
+	await id++;
 
-	return res.status(200).json(req.body);
+	let game = {
+		id,
+		...req.body
+	};
+
+	await db.push(game);
+	res.status(200).json(game);
 });
 
 server.listen(5000, () =>
