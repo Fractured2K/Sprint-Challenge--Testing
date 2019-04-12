@@ -29,6 +29,17 @@ server.post('/games', async (req, res) => {
 	res.status(200).json(game);
 });
 
+server.get('/games/:id', async (req, res) => {
+	const game = await db.filter(game => game.id == req.params.id);
+
+	if (!game.length)
+		return res.status(404).json({
+			message: 'Sorry, but that game does not exist'
+		});
+
+	res.status(200).json(game);
+});
+
 server.listen(5000, () =>
 	console.log('Server is now up and running at http://localhost:5000')
 );
