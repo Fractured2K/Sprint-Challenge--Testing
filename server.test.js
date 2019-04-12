@@ -14,13 +14,12 @@ describe('Server.js endpoint tests', () => {
 				.post('/games')
 				.send(game);
 
-			expect(response).toBe(200);
+			expect(response.status).toBe(200);
 		});
 
 		it('should return 422 if title or genre are missing from the body', async () => {
 			let game = {
 				title: 'Pacman',
-				genre: 'Arcade',
 				releaseYear: 1980
 			};
 
@@ -28,7 +27,7 @@ describe('Server.js endpoint tests', () => {
 				.post('/games')
 				.send(game);
 
-			expect(response).toBe(422);
+			expect(response.status).toBe(422);
 		});
 
 		it('should return newly created game', async () => {
@@ -53,7 +52,7 @@ describe('Server.js endpoint tests', () => {
 	describe('GET /games', () => {
 		it('should return status 200 OK after retrieving games', async () => {
 			let response = await request(server).get('/games');
-			expect(response).toBe(200);
+			expect(response.status).toBe(200);
 		});
 
 		it('should return an array after retrieving games', async () => {

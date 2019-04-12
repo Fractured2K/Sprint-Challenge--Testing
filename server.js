@@ -5,8 +5,8 @@ const db = [];
 
 server.use(express.json());
 
-server.get('/games', async (req, res) => {
-	return await res.status(200).json(db);
+server.get('/games', (req, res) => {
+	return res.status(200).json(db);
 });
 
 server.post('/games', async (req, res) => {
