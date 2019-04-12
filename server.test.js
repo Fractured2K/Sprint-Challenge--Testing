@@ -56,5 +56,11 @@ describe('Server.js endpoint tests', () => {
 
 			expect(response).toBe(200);
 		});
+
+		it('should return an array after retrieving games', async () => {
+			const response = await request(server).get('/');
+
+			expect(Array.isArray(response.body)).toBe(true);
+		});
 	});
 });
